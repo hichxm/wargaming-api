@@ -1,0 +1,16 @@
+{
+    "name": "hichxm/wargaming-api",
+    "description": "Wargaming.net api",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hichxm",
+            "email": "hicham.slimani.fr@gmail.com"
+        }
+    ],
+    "require": {}
+}
