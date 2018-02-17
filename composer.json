@@ -12,5 +12,10 @@
             "email": "hicham.slimani.fr@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Hichxm\\": "src"
+        }
+    }
 }
