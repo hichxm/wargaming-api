@@ -83,10 +83,10 @@ class WargamingApiTest extends TestCase {
         //Init Wargaming.net api key and region
         $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
 
-        $server = $war->serverInfo("asia");
+        $server = $war->serverInfo("com");
 
-        $this->assertEquals(503,$server['wot'][1]['server']);
-        $this->assertEquals(501,$server['wot'][0]['server']);
+        $this->assertEquals(304,$server['wot'][1]['server']);
+        $this->assertEquals(303,$server['wot'][0]['server']);
 
     }
 
