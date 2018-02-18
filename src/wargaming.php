@@ -17,6 +17,7 @@ class WargamingApi
 
     private $links = [
         "accountSearch" => "api.worldoftanks.{region}/wgn/account/list/?application_id={key}&search={search}&limit={limit}&type={method}",
+        "accountId" => "api.worldoftanks.{region}/wgn/account/info/?application_id={key}&account_id={accounts}",
     ];
 
     /**
@@ -67,6 +68,29 @@ class WargamingApi
     }
 
     /**
+     * @param array $accounts_id
+     * @return mixed
+     * @throws Exception
+     */
+    public function searchPlayer($accounts_id = [])
+    {
+        $accounts = null;
+        foreach ($accounts_id as $account_id) {
+            $accounts .= $account_id . ",";
+        }
+
+        $returned = $this->request("accountId", [
+            "accounts" => $accounts
+        ]);
+
+        return [
+            "count" => $returned['meta']['count'],
+            "players" => $returned['data']
+        ];
+
+    }
+
+    /**
      * @param string $ref
      * @param array $options
      * @return mixed
@@ -87,6 +111,12 @@ class WargamingApi
                 $link = str_replace("{search}", $options['search'], $link);
                 $link = str_replace("{limit}", $options['limit'], $link);
                 $link = str_replace("{method}", $options['method'], $link);
+                break;
+
+            case "accountId":
+
+                //Replace data of the link
+                $link = str_replace("{accounts}", $options['accounts'], $link);
                 break;
         }
 

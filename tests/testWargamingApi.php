@@ -38,4 +38,24 @@ class WargamingApiTest extends TestCase {
         $this->assertEquals("volca780", $players[0]['nickname']);
     }
 
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function check_search_player_info_with_default_option() {
+
+        //Init Wargaming.net api key and region
+        $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+
+        //Get all players with id: 500080014, 514444123, 514444121
+        $players = $war->searchPlayer(["500080014", "514444123", "514444121"]);
+
+        $this->assertEquals("vol", $players['players']['500080014']['nickname']);
+        $this->assertEquals("volca780", $players['players']['514444123']['nickname']);
+        $this->assertEquals("__Swat_BegBang__", $players['players']['514444121']['nickname']);
+
+        $this->assertEquals(3, $players['count']);
+
+    }
+
 }
