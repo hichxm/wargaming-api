@@ -58,7 +58,7 @@ class WargamingApi
             "limit" => !empty($options['limit']) ? $options['limit'] : 100,
             "method" => !empty($options['method']) ? $options['method'] : "startswith"
         ]);
-
+        
         return [
             "count" => $returned['meta']['count'],
             "players" => $returned['data']
@@ -70,6 +70,7 @@ class WargamingApi
      * @param string $ref
      * @param array $options
      * @return mixed
+     * @throws Exception
      */
     private function request($ref, $options)
     {
@@ -91,8 +92,13 @@ class WargamingApi
 
         $client = new Client();
         $res = $client->request("GET", $link);
+        $res = json_decode($res->getBody(), true);
 
-        return json_decode($res->getBody(), true);
+        if ($res['status'] === "error") {
+            throw new Exception("INVALID_APPLICATION_ID", 407);
+        }
+
+        return $res;
 
     }
 

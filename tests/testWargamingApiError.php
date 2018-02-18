@@ -9,6 +9,22 @@ class WargamingApiErrorTest extends TestCase {
      * @test
      * @throws Exception
      */
+    public function check_search_player_with_bad_api_key_but_good_data_option() {
+
+        //Init Wargaming.net api key and region
+        $war = new WargamingApi("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "eu");
+
+        try {
+            $war->searchPlayer("volca7");
+        } catch (Exception $e) {
+            $this->assertEquals("INVALID_APPLICATION_ID", $e->getMessage());
+        }
+    }
+
+    /**
+     * @test
+     * @throws Exception
+     */
     public function check_search_player_with_good_api_key_but_bad_data_option() {
 
         //Init Wargaming.net api key and region
