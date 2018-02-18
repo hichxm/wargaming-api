@@ -15,7 +15,7 @@ class WargamingApiTest extends TestCase {
         $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
 
         //Get all players where username start with: volca7
-        $players = $war->searchPlayer("volca7")['players'];
+        $players = $war->searchPlayers("volca7")['players'];
 
         $this->assertEquals("volca780", $players[1]['nickname']);
         $this->assertEquals("wot", $players[1]['games'][0]);
@@ -31,7 +31,7 @@ class WargamingApiTest extends TestCase {
         $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
 
         //Get all players where username start with: volca7
-        $players = $war->searchPlayer("volca780", [
+        $players = $war->searchPlayers("volca780", [
             "method" => "exact"
         ])['players'];
 

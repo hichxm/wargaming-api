@@ -15,7 +15,7 @@ class WargamingApiErrorTest extends TestCase {
         $war = new WargamingApi("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "eu");
 
         try {
-            $war->searchPlayer("volca7");
+            $war->searchPlayers("volca7");
         } catch (Exception $e) {
             $this->assertEquals("INVALID_APPLICATION_ID", $e->getMessage());
         }
@@ -32,21 +32,21 @@ class WargamingApiErrorTest extends TestCase {
 
         //NOT_ENOUGH_SEARCH_LENGTH
         try{
-            $war->searchPlayer("vo");
+            $war->searchPlayers("vo");
         } catch (Exception $e) {
             $this->assertEquals("NOT_ENOUGH_SEARCH_LENGTH", $e->getMessage());
         }
 
         //SEARCH_NOT_SPECIFIED
         try{
-            $war->searchPlayer("");
+            $war->searchPlayers("");
         } catch (Exception $e) {
             $this->assertEquals("SEARCH_NOT_SPECIFIED", $e->getMessage());
         }
 
         //SEARCH_LIST_LIMIT_EXCEEDED
         try{
-            $war->searchPlayer("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+            $war->searchPlayers("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         } catch (Exception $e) {
             $this->assertEquals("SEARCH_LIST_LIMIT_EXCEEDED", $e->getMessage());
         }

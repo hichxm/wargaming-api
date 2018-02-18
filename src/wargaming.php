@@ -36,7 +36,7 @@ class WargamingApi
      * @return mixed
      * @throws Exception
      */
-    public function searchPlayer($search, $options = null)
+    public function searchPlayers($search, $options = null)
     {
 
         if (strlen($search) == 0) {
@@ -58,7 +58,7 @@ class WargamingApi
             "limit" => !empty($options['limit']) ? $options['limit'] : 100,
             "method" => !empty($options['method']) ? $options['method'] : "startswith"
         ]);
-        
+
         return [
             "count" => $returned['meta']['count'],
             "players" => $returned['data']
