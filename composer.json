@@ -1,6 +1,7 @@
 {
     "name": "hichxm/wargaming-api",
     "description": "Wargaming.net api oriented object.",
+    "keywords": ["wargaming", "api", "oriented", "object", "wot"],
     "type": "library",
     "require-dev": {
         "phpunit/phpunit": "^7.0"
