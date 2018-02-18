@@ -9,7 +9,7 @@ class WargamingApiErrorTest extends TestCase {
      * @test
      * @throws Exception
      */
-    public function check_search_player_with_bad_api_key_but_good_data_option() {
+    public function check_search_players_with_bad_api_key_but_good_data_option() {
 
         //Init Wargaming.net api key and region
         $war = new WargamingApi("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "eu");
@@ -25,7 +25,7 @@ class WargamingApiErrorTest extends TestCase {
      * @test
      * @throws Exception
      */
-    public function check_search_player_with_good_api_key_but_bad_data_option() {
+    public function check_search_players_with_good_api_key_but_bad_data_option() {
 
         //Init Wargaming.net api key and region
         $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");

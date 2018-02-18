@@ -9,7 +9,7 @@ class WargamingApiTest extends TestCase {
      * @test
      * @throws Exception
      */
-    public function check_search_player_with_default_option() {
+    public function check_search_players_with_default_option() {
 
         //Init Wargaming.net api key and region
         $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
@@ -25,7 +25,7 @@ class WargamingApiTest extends TestCase {
      * @test
      * @throws Exception
      */
-    public function check_search_player_with_personel_option() {
+    public function check_search_players_with_personel_option() {
 
         //Init Wargaming.net api key and region
         $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
