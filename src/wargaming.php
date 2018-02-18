@@ -32,11 +32,11 @@ class WargamingApi
 
     /**
      * @param string $search
-     * @param array $options
+     * @param array|null $options
      * @return mixed
      * @throws Exception
      */
-    public function searchPlayer($search, $options)
+    public function searchPlayer($search, $options = null)
     {
 
         if (strlen($search) == 0) {
@@ -53,11 +53,16 @@ class WargamingApi
             throw new Exception("SEARCH_LIST_LIMIT_EXCEEDED", "407");
         }
 
-        return $this->request("accountSearch", [
+        $returned = $this->request("accountSearch", [
             "search" => $search,
             "limit" => !empty($options['limit']) ? $options['limit'] : 100,
             "method" => !empty($options['method']) ? $options['method'] : "startswith"
         ]);
+
+        return [
+            "count" => $returned['meta']['count'],
+            "players" => $returned['data']
+        ];
 
     }
 
@@ -84,7 +89,10 @@ class WargamingApi
                 break;
         }
 
-        return $link;
+        $client = new Client();
+        $res = $client->request("GET", $link);
+
+        return json_decode($res->getBody(), true);
 
     }
 
