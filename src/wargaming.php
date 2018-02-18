@@ -18,6 +18,8 @@ class WargamingApi
     private $links = [
         "accountSearch" => "api.worldoftanks.{region}/wgn/account/list/?application_id={key}&search={search}&limit={limit}&type={method}",
         "accountId" => "api.worldoftanks.{region}/wgn/account/info/?application_id={key}&account_id={accounts}",
+
+        "serverInfo" => "api.worldoftanks.{region}/wgn/servers/info/?application_id={key}"
     ];
 
     /**
@@ -91,6 +93,27 @@ class WargamingApi
     }
 
     /**
+     * @param string|null $region
+     * @return array
+     * @throws Exception
+     */
+    public function serverInfo($region = null)
+    {
+        $region = !empty($region) ? $region : $this->region;
+
+        $returned = $this->request("serverInfo", [
+            "region" => $region
+        ])['data'];
+
+        return [
+            "wotb" => $returned['wotb'],
+            "wot" => $returned['wot'],
+            "wows" => $returned['wows']
+        ];
+
+    }
+
+    /**
      * @param string $ref
      * @param array $options
      * @return mixed
@@ -99,10 +122,6 @@ class WargamingApi
     private function request($ref, $options)
     {
         $link = $this->links[$ref];
-
-        //Replace data of the link
-        $link = str_replace("{region}", $this->region, $link);
-        $link = str_replace("{key}", $this->key, $link);
 
         switch ($ref) {
             case "accountSearch":
@@ -118,7 +137,17 @@ class WargamingApi
                 //Replace data of the link
                 $link = str_replace("{accounts}", $options['accounts'], $link);
                 break;
+
+            case "serverInfo":
+
+                //Replace data of the link
+                $link = str_replace("{region}", $options['region'], $link);
+                break;
         }
+
+        //Replace data of the link
+        $link = str_replace("{region}", $this->region, $link);
+        $link = str_replace("{key}", $this->key, $link);
 
         $client = new Client();
         $res = $client->request("GET", $link);

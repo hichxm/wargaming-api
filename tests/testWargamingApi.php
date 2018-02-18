@@ -58,4 +58,36 @@ class WargamingApiTest extends TestCase {
 
     }
 
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function check_server_info_with_default_region() {
+
+        //Init Wargaming.net api key and region
+        $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+
+        $server = $war->serverInfo();
+
+        $this->assertEquals("EU1",$server['wot'][1]['server']);
+        $this->assertEquals("EU2",$server['wot'][0]['server']);
+
+    }
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function check_server_info_with_custom_region() {
+
+        //Init Wargaming.net api key and region
+        $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+
+        $server = $war->serverInfo("asia");
+
+        $this->assertEquals(503,$server['wot'][1]['server']);
+        $this->assertEquals(501,$server['wot'][0]['server']);
+
+    }
+
 }
