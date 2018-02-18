@@ -9,19 +9,33 @@ class WargamingApiTest extends TestCase {
      * @test
      * @throws Exception
      */
-    public function check_with_good_data_the_api() {
+    public function check_search_player_with_default_option() {
 
         //Init Wargaming.net api key and region
         $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
 
         //Get all players where username start with: volca7
-        $players = $war->searchPlayer("volca7", [
-            "limit" => 2,
-            "method" => "startswith"
-        ]);
+        $players = $war->searchPlayer("volca7")['players'];
 
-        var_dump($players);
+        $this->assertEquals("volca780", $players[1]['nickname']);
+        $this->assertEquals("wot", $players[1]['games'][0]);
+    }
 
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function check_search_player_with_personel_option() {
+
+        //Init Wargaming.net api key and region
+        $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+
+        //Get all players where username start with: volca7
+        $players = $war->searchPlayer("volca780", [
+            "method" => "exact"
+        ])['players'];
+
+        $this->assertEquals("volca780", $players[0]['nickname']);
     }
 
 }
