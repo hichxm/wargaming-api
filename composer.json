@@ -1,6 +1,6 @@
 {
     "name": "hichxm/wargaming-api",
-    "description": "Wargaming.net api",
+    "description": "Wargaming.net api oriented object.",
     "type": "library",
     "require-dev": {
         "phpunit/phpunit": "^7.0"
@@ -13,6 +13,7 @@
         }
     ],
     "require": {
+        "php": ">=7.1.9",
         "guzzlehttp/guzzle": "^6.3"
     },
     "autoload": {
