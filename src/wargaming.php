@@ -62,7 +62,8 @@ class WargamingApi
         $returned = $this->request("accountSearch", [
             "search" => $search,
             "limit" => !empty($options['limit']) ? $options['limit'] : 100,
-            "method" => !empty($options['method']) ? $options['method'] : "startswith"
+            "method" => !empty($options['method']) ? $options['method'] : "startswith",
+            "region" => !empty($options['region']) ? $options['region'] : $this->region
         ]);
 
         return [
@@ -85,7 +86,8 @@ class WargamingApi
         }
 
         $returned = $this->request("accountId", [
-            "accounts" => $accounts
+            "accounts" => $accounts,
+            "region" => !empty($options['region']) ? $options['region'] : $this->region
         ]);
 
         return [
@@ -102,16 +104,15 @@ class WargamingApi
      */
     public function serverInfo($region = null)
     {
-        $region = !empty($region) ? $region : $this->region;
 
         $returned = $this->request("serverInfo", [
-            "region" => $region
-        ])['data'];
+            "region" => !empty($region) ? $region : $this->region
+        ]);
 
         return [
-            "wotb" => $returned['wotb'],
-            "wot" => $returned['wot'],
-            "wows" => $returned['wows']
+            "wotb" => $returned['data']['wotb'],
+            "wot" => $returned['data']['wot'],
+            "wows" => $returned['data']['wows']
         ];
 
     }
@@ -142,7 +143,8 @@ class WargamingApi
         $returned = $this->request("clansSearch", [
             "search" => $search,
             "limit" => !empty($options['limit']) ? $options['limit'] : 100,
-            "pagination" => !empty($options['pagination']) ? $options['pagination'] : 1
+            "pagination" => !empty($options['pagination']) ? $options['pagination'] : 1,
+            "region" => !empty($options['region']) ? $options['region'] : $this->region
         ]);
 
         return [
@@ -169,12 +171,14 @@ class WargamingApi
                 $link = str_replace("{search}", $options['search'], $link);
                 $link = str_replace("{limit}", $options['limit'], $link);
                 $link = str_replace("{method}", $options['method'], $link);
+                $link = str_replace("{region}", $options['region'], $link);
                 break;
 
             case "accountId":
 
                 //Replace data of the link
                 $link = str_replace("{accounts}", $options['accounts'], $link);
+                $link = str_replace("{region}", $options['region'], $link);
                 break;
 
             case "clansSearch":
@@ -183,6 +187,7 @@ class WargamingApi
                 $link = str_replace("{search}", $options['search'], $link);
                 $link = str_replace("{limit}", $options['limit'], $link);
                 $link = str_replace("{pagination}", $options['pagination'], $link);
+                $link = str_replace("{region}", $options['region'], $link);
                 break;
 
             case "serverInfo":
