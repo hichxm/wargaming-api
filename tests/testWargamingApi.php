@@ -104,4 +104,22 @@ class WargamingApiTest extends TestCase {
         $this->assertEquals(100, $clans['count']);
     }
 
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function check_search_clans_with_custom_option()
+    {
+        //Init Wargaming.net api key and region
+        $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+
+        $clans = $war->searchClans("aze", [
+            "limit" => 10,
+            "pagination" => 1,
+            "region" => "ru"
+        ]);
+
+        $this->assertEquals(10, $clans['count']);
+    }
+
 }

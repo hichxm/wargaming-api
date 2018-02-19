@@ -119,11 +119,11 @@ class WargamingApi
 
     /**
      * @param string $search
-     * @param array|null $option
+     * @param array|null $options
      * @return array
      * @throws Exception
      */
-    public function searchClans($search, $option = null)
+    public function searchClans($search, $options = null)
     {
 
         if (strlen($search) == 0) {
