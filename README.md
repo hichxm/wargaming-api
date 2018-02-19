@@ -1,4 +1,5 @@
 
+
 # Wargaming Api
 
 This package composer, allows to use more simply the 
@@ -7,15 +8,46 @@ object-oriented code for your IDE (*integrated development environment*).
 
 ## Documentation
 
-```php
-//Init Wargaming.net api key and region
-$WargamingApi = new WargamingApi("YOUR API KEY", "REGION");
+1) Get your application id [here](https://developers.wargaming.net/applications/)
+2) Initialise your application
 
-//Search players
-$WargamingApi->searchPlayers("volca780", [
-	"method" => "exact"
-]);
-```
+	| Region        | code |
+	| ------------- | ---- |
+	| Russia        | ru   |
+	| Europe        | eu   |
+	| Asia          | asia |
+	| North America | na   |
+	```php
+	$WarGaming = new WargamingApi($application_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", $region = "eu");
+	```
+3) Make request
+	
+	1) Search player
+		```php
+		$WarGaming->searchPlayers($search = "volca", $options = [
+			"limit" => 10,
+			"method" => "startswith",
+			"region" => "eu"
+		]);
+		```
+	2) Player(s) info
+		```php
+		$WarGaming->searchPlayer($players_id = ["500080014", "514444123", "514444121"], $options = [
+			"region" => "eu"
+		]);
+		```
+	3) Server info
+		```php
+		$WarGaming->serverInfo($region = "eu");
+		```
+	4) Search clans
+		```php
+		$WarGaming->searchClans($search = "volca", $options = [
+			"limit" => 10,
+			"pagination" => "1",
+			"region" => "eu"
+		]);
+		```
 
 ## License
 
