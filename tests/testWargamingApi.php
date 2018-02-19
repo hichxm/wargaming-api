@@ -81,12 +81,12 @@ class WargamingApiTest extends TestCase {
     public function check_server_info_with_custom_region() {
 
         //Init Wargaming.net api key and region
-        $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+        $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "ru");
 
-        $server = $war->serverInfo("com");
+        $server = $war->serverInfo("eu");
 
-        $this->assertEquals(304,$server['wot'][1]['server']);
-        $this->assertEquals(303,$server['wot'][0]['server']);
+        $this->assertEquals("EU1",$server['wot'][1]['server']);
+        $this->assertEquals("EU2",$server['wot'][0]['server']);
 
     }
 
