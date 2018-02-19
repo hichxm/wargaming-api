@@ -81,13 +81,45 @@ class WargamingApiTest extends TestCase {
     public function check_server_info_with_custom_region() {
 
         //Init Wargaming.net api key and region
+        $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "ru");
+
+        $server = $war->serverInfo("eu");
+
+        $this->assertEquals("EU1",$server['wot'][1]['server']);
+        $this->assertEquals("EU2",$server['wot'][0]['server']);
+
+    }
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function check_search_clans_with_default_option()
+    {
+        //Init Wargaming.net api key and region
         $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
 
-        $server = $war->serverInfo("com");
+        $clans = $war->searchClans("aze");
 
-        $this->assertEquals(304,$server['wot'][1]['server']);
-        $this->assertEquals(303,$server['wot'][0]['server']);
+        $this->assertEquals(100, $clans['count']);
+    }
 
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function check_search_clans_with_custom_option()
+    {
+        //Init Wargaming.net api key and region
+        $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+
+        $clans = $war->searchClans("aze", [
+            "limit" => 10,
+            "pagination" => 1,
+            "region" => "ru"
+        ]);
+
+        $this->assertEquals(10, $clans['count']);
     }
 
 }

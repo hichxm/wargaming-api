@@ -4,6 +4,7 @@ namespace Hichxm\WarGaming;
 
 use Exception;
 use GuzzleHttp\Client;
+use function GuzzleHttp\Psr7\str;
 
 
 /**
@@ -18,6 +19,8 @@ class WargamingApi
     private $links = [
         "accountSearch" => "api.worldoftanks.{region}/wgn/account/list/?application_id={key}&search={search}&limit={limit}&type={method}",
         "accountId" => "api.worldoftanks.{region}/wgn/account/info/?application_id={key}&account_id={accounts}",
+
+        "clansSearch" => "api.worldoftanks.{region}/wgn/clans/list/?application_id={key}&search={search}&limit={limit}&page_no={pagination}",
 
         "serverInfo" => "api.worldoftanks.{region}/wgn/servers/info/?application_id={key}"
     ];
@@ -46,7 +49,7 @@ class WargamingApi
 
             //Search not specified
             throw new Exception("SEARCH_NOT_SPECIFIED", "402");
-        } else if (strlen($search) <= 3) {
+        } else if (strlen($search) < 3) {
 
             //Search no enough
             throw new Exception("NOT_ENOUGH_SEARCH_LENGTH", "407");
@@ -59,7 +62,8 @@ class WargamingApi
         $returned = $this->request("accountSearch", [
             "search" => $search,
             "limit" => !empty($options['limit']) ? $options['limit'] : 100,
-            "method" => !empty($options['method']) ? $options['method'] : "startswith"
+            "method" => !empty($options['method']) ? $options['method'] : "startswith",
+            "region" => !empty($options['region']) ? $options['region'] : $this->region
         ]);
 
         return [
@@ -82,7 +86,8 @@ class WargamingApi
         }
 
         $returned = $this->request("accountId", [
-            "accounts" => $accounts
+            "accounts" => $accounts,
+            "region" => !empty($options['region']) ? $options['region'] : $this->region
         ]);
 
         return [
@@ -99,18 +104,54 @@ class WargamingApi
      */
     public function serverInfo($region = null)
     {
-        $region = !empty($region) ? $region : $this->region;
 
         $returned = $this->request("serverInfo", [
-            "region" => $region
-        ])['data'];
+            "region" => !empty($region) ? $region : $this->region
+        ]);
 
         return [
-            "wotb" => $returned['wotb'],
-            "wot" => $returned['wot'],
-            "wows" => $returned['wows']
+            "wotb" => $returned['data']['wotb'],
+            "wot" => $returned['data']['wot'],
+            "wows" => $returned['data']['wows']
         ];
 
+    }
+
+    /**
+     * @param string $search
+     * @param array|null $options
+     * @return array
+     * @throws Exception
+     */
+    public function searchClans($search, $options = null)
+    {
+
+        if (strlen($search) == 0) {
+
+            //Search not specified
+            throw new Exception("SEARCH_NOT_SPECIFIED", "402");
+        } else if (strlen($search) < 3) {
+
+            //Search no enough
+            throw new Exception("NOT_ENOUGH_SEARCH_LENGTH", "407");
+        } else if (strlen($search) >= 100) {
+
+            //Search as exceeded
+            throw new Exception("SEARCH_LIST_LIMIT_EXCEEDED", "407");
+        }
+
+        $returned = $this->request("clansSearch", [
+            "search" => $search,
+            "limit" => !empty($options['limit']) ? $options['limit'] : 100,
+            "pagination" => !empty($options['pagination']) ? $options['pagination'] : 1,
+            "region" => !empty($options['region']) ? $options['region'] : $this->region
+        ]);
+
+        return [
+            "count" => $returned['meta']['count'],
+            "total" => $returned['meta']['total'],
+            "clans" => $returned['data']
+        ];
     }
 
     /**
@@ -130,12 +171,23 @@ class WargamingApi
                 $link = str_replace("{search}", $options['search'], $link);
                 $link = str_replace("{limit}", $options['limit'], $link);
                 $link = str_replace("{method}", $options['method'], $link);
+                $link = str_replace("{region}", $options['region'], $link);
                 break;
 
             case "accountId":
 
                 //Replace data of the link
                 $link = str_replace("{accounts}", $options['accounts'], $link);
+                $link = str_replace("{region}", $options['region'], $link);
+                break;
+
+            case "clansSearch":
+
+                //Replace data of the link
+                $link = str_replace("{search}", $options['search'], $link);
+                $link = str_replace("{limit}", $options['limit'], $link);
+                $link = str_replace("{pagination}", $options['pagination'], $link);
+                $link = str_replace("{region}", $options['region'], $link);
                 break;
 
             case "serverInfo":
