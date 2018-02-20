@@ -79,7 +79,7 @@ class WargamingApi
      * @return mixed
      * @throws Exception
      */
-    public function searchPlayer($accounts_id = [])
+    public function infoPlayersById($accounts_id = [])
     {
         $accounts = null;
         foreach ($accounts_id as $account_id) {
@@ -161,7 +161,7 @@ class WargamingApi
      * @return array
      * @throws Exception
      */
-    public function searchClan($clans_id = [], $options = null)
+    public function infoClansById($clans_id = [], $options = null)
     {
         $clans = null;
 

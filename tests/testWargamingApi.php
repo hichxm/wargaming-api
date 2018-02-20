@@ -48,7 +48,7 @@ class WargamingApiTest extends TestCase {
         $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
 
         //Get all players with id: 500080014, 514444123, 514444121
-        $players = $war->searchPlayer(["500080014", "514444123", "514444121"]);
+        $players = $war->infoPlayersById(["500080014", "514444123", "514444121"]);
 
         $this->assertEquals("vol", $players['players']['500080014']['nickname']);
         $this->assertEquals("volca780", $players['players']['514444123']['nickname']);
@@ -99,8 +99,7 @@ class WargamingApiTest extends TestCase {
         //Init Wargaming.net api key and region
         $war = new WargamingApi("e9807cace93606169c54fb8e9ec763b2", "eu");
 
-        $clans = $war->searchClan(["500041879", "500034196"]);
-        var_dump($clans);
+        $clans = $war->infoClansById(["500041879", "500034196"]);
 
         $this->assertEquals(2, $clans['count']);
     }
