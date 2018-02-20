@@ -21,6 +21,7 @@ class WargamingApi
         "accountId" => "api.worldoftanks.{region}/wgn/account/info/?application_id={key}&account_id={accounts}",
 
         "clansSearch" => "api.worldoftanks.{region}/wgn/clans/list/?application_id={key}&search={search}&limit={limit}&page_no={pagination}",
+        "clansId" => "api.worldoftanks.{region}/wgn/clans/info/?application_id={key}&clan_id={clans}",
 
         "serverInfo" => "api.worldoftanks.{region}/wgn/servers/info/?application_id={key}"
     ];
@@ -155,6 +156,31 @@ class WargamingApi
     }
 
     /**
+     * @param array $clans_id
+     * @param array|null $options
+     * @return array
+     * @throws Exception
+     */
+    public function searchClan($clans_id = [], $options = null)
+    {
+        $clans = null;
+
+        foreach ($clans_id as $clan_id) {
+            $clans .= $clan_id . ",";
+        }
+
+        $returned = $this->request("clansId", [
+            "clans" => $clans,
+            "region" => !empty($options['region']) ? $options['region'] : $this->region
+        ]);
+
+        return [
+            "count" => $returned['meta']['count'],
+            "clans" => $returned['data']
+        ];
+    }
+
+    /**
      * @param string $ref
      * @param array $options
      * @return mixed
@@ -187,6 +213,13 @@ class WargamingApi
                 $link = str_replace("{search}", $options['search'], $link);
                 $link = str_replace("{limit}", $options['limit'], $link);
                 $link = str_replace("{pagination}", $options['pagination'], $link);
+                $link = str_replace("{region}", $options['region'], $link);
+                break;
+
+            case "clansId":
+
+                //Replace data of the link
+                $link = str_replace("{clans}", $options['clans'], $link);
                 $link = str_replace("{region}", $options['region'], $link);
                 break;
 
