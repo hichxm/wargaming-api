@@ -30,9 +30,9 @@ object-oriented code for your IDE (*integrated development environment*).
 			"region" => "eu"
 		]);
 		```
-	2) Player(s) info
+	2) Search player(s) by id
 		```php
-		$WarGaming->searchPlayer($players_id = ["500080014", "514444123", "514444121"], $options = [
+		$WarGaming->infoPlayersById($players_id = ["500080014", "514444123", "514444121"], $options = [
 			"region" => "eu"
 		]);
 		```
@@ -47,6 +47,16 @@ object-oriented code for your IDE (*integrated development environment*).
 			"pagination" => "1",
 			"region" => "eu"
 		]);
+		```
+	5) Search clans by id
+		```php
+		$WarGaming->infoClansById($clans_id = ["500041879", "500034196"], $options = [
+			"region" => "eu"
+		]);
+		```
+	5) Search clans of player(s) id
+		```php
+		$WarGaming->playerClans($players_id = ["500450795", "503197062", "500435236"]);
 		```
 
 ## License
