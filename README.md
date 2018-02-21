@@ -6,7 +6,7 @@ This package composer, allows to use more simply the
 **wargaming API** with a very simple and well documented 
 object-oriented code for your IDE (*integrated development environment*).
 
-## Documentation
+## Documentation. [full doc here](DOC.md)
 
 1) Get your application id [here](https://developers.wargaming.net/applications/)
 2) Initialise your application

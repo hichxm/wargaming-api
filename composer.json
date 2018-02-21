@@ -4,7 +4,8 @@
     "keywords": ["wargaming", "api", "oriented", "object", "wot"],
     "type": "library",
     "require-dev": {
-        "phpunit/phpunit": "^7.0"
+        "phpunit/phpunit": "^7.0",
+        "victorjonsson/markdowndocs": "^1.3"
     },
     "license": "MIT",
     "authors": [

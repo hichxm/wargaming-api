@@ -41,7 +41,7 @@ class WargamingApi
     /**
      * @param string $search
      * @param array|null $options
-     * @return mixed
+     * @return array
      * @throws Exception
      */
     public function searchPlayers($search, $options = null)
@@ -77,10 +77,10 @@ class WargamingApi
 
     /**
      * @param array $accounts_id
-     * @return mixed
+     * @return array
      * @throws Exception
      */
-    public function infoPlayersById($accounts_id = [])
+    public function infoPlayersById($accounts_id)
     {
         $accounts = null;
         foreach ($accounts_id as $account_id) {
@@ -162,7 +162,7 @@ class WargamingApi
      * @return array
      * @throws Exception
      */
-    public function infoClansById($clans_id = [], $options = null)
+    public function infoClansById($clans_id, $options = null)
     {
         $clans = null;
 
@@ -186,7 +186,7 @@ class WargamingApi
      * @return array
      * @throws Exception
      */
-    public function playerClans($accounts_id = [])
+    public function playerClans($accounts_id)
     {
         $accounts = null;
 
