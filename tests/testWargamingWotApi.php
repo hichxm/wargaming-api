@@ -14,5 +14,5 @@ class testWargamingWotApi extends TestCase{
 
         $this->assertTrue(true);
     }
-
+    
 }
