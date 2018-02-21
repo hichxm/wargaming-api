@@ -61,4 +61,34 @@ class testWargamingWotApi extends TestCase{
 
     }
 
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function check_players_vehicules_with_default_option()
+    {
+        //Init Wargaming.net api key and region
+        $wot = new WorgamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+
+        $players = $wot->playersTank(["500450795", "503197062", "500435236"]);
+
+        $this->assertEquals(3, $players['count']);
+    }
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function check_players_vehicules_with_custom_option()
+    {
+        //Init Wargaming.net api key and region
+        $wot = new WorgamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+
+        $players = $wot->playersTank(["500450795", "503197062", "500435236"], [
+            "tanks" => ["2849", "10785"]
+        ]);
+
+        $this->assertEquals(3, $players['count']);
+    }
+
 }
