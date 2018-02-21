@@ -43,9 +43,21 @@ class testWargamingWotApi extends TestCase{
             "method" => "startswith"
         ]);
 
-        var_dump($players);
-
         $this->assertEquals(5, $players['count']);
+
+    }
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function check_info_player_work_with_default_options()
+    {
+        $wot = new WorgamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+
+        $players = $wot->infoPlayersById(["500080014", "514444123"]);
+
+        $this->assertEquals("volca780", $players['players']["514444123"]['nickname']);
 
     }
 

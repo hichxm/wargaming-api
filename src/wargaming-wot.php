@@ -12,7 +12,8 @@ class WorgamingWotApi
     private $region;
 
     private $links = [
-        "accountSearch" => "api.worldoftanks.{region}/wot/account/list/?application_id={key}&search={search}&limit={limit}&type={method}"
+        "accountSearch" => "api.worldoftanks.{region}/wot/account/list/?application_id={key}&search={search}&limit={limit}&type={method}",
+        "accountId" => "api.worldoftanks.{region}/wot/account/info/?application_id={key}&account_id={accounts}"
     ];
 
     /**
@@ -63,6 +64,30 @@ class WorgamingWotApi
     }
 
     /**
+     * @param array $accounts_id
+     * @return array
+     * @throws Exception
+     */
+    public function infoPlayersById($accounts_id)
+    {
+        $accounts = null;
+        foreach ($accounts_id as $account_id) {
+            $accounts .= $account_id . ",";
+        }
+
+        $returned = $this->request("accountId", [
+            "accounts" => $accounts,
+            "region" => !empty($options['region']) ? $options['region'] : $this->region
+        ]);
+
+        return [
+            "count" => $returned['meta']['count'],
+            "players" => $returned['data']
+        ];
+
+    }
+
+    /**
      * @param string $ref
      * @param array $options
      * @return mixed
@@ -79,6 +104,13 @@ class WorgamingWotApi
                 $link = str_replace("{search}", $options['search'], $link);
                 $link = str_replace("{limit}", $options['limit'], $link);
                 $link = str_replace("{method}", $options['method'], $link);
+                $link = str_replace("{region}", $options['region'], $link);
+                break;
+
+            case "accountId":
+
+                //Replace data of the link
+                $link = str_replace("{accounts}", $options['accounts'], $link);
                 $link = str_replace("{region}", $options['region'], $link);
                 break;
         }
