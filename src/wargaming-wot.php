@@ -5,7 +5,7 @@ namespace Hichxm\WarGaming;
 use Exception;
 use GuzzleHttp\Client;
 
-class WorgamingWotApi
+class WargamingWotApi
 {
 
     private $key;

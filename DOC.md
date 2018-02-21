@@ -1,11 +1,11 @@
 ## Table of contents
 
-- [\Hichxm\WarGaming\WorgamingWotApi](#class-hichxmwargamingworgamingwotapi)
+- [\Hichxm\WarGaming\WargamingWotApi](#class-hichxmwargamingwargamingwotapi)
 - [\Hichxm\WarGaming\WargamingApi](#class-hichxmwargamingwargamingapi)
 
 <hr />
 
-### Class: \Hichxm\WarGaming\WorgamingWotApi
+### Class: \Hichxm\WarGaming\WargamingWotApi
 
 | Visibility | Function |
 |:-----------|:---------|

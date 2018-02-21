@@ -1,6 +1,6 @@
 <?php
 
-use Hichxm\WarGaming\WorgamingWotApi;
+use Hichxm\WarGaming\WargamingWotApi;
 use PHPUnit\Framework\TestCase;
 
 class testWargamingWotApi extends TestCase{
@@ -10,7 +10,7 @@ class testWargamingWotApi extends TestCase{
      */
     public function check_namespace_work()
     {
-        $wot = new WorgamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+        $wot = new WargamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
 
         $this->assertTrue(true);
     }
@@ -21,7 +21,7 @@ class testWargamingWotApi extends TestCase{
      */
     public function check_search_player_work_with_default_options()
     {
-        $wot = new WorgamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+        $wot = new WargamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
 
         $players = $wot->searchPlayers("volca780");
 
@@ -35,7 +35,7 @@ class testWargamingWotApi extends TestCase{
      */
     public function check_search_player_work_with_custom_options()
     {
-        $wot = new WorgamingWotApi("e9807cace93606169c54fb8e9ec763b2", "ru");
+        $wot = new WargamingWotApi("e9807cace93606169c54fb8e9ec763b2", "ru");
 
         $players = $wot->searchPlayers("vol", [
             "limit" => 5,
@@ -53,7 +53,7 @@ class testWargamingWotApi extends TestCase{
      */
     public function check_info_player_work_with_default_options()
     {
-        $wot = new WorgamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+        $wot = new WargamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
 
         $players = $wot->infoPlayersById(["500080014", "514444123"]);
 
@@ -67,7 +67,7 @@ class testWargamingWotApi extends TestCase{
     public function check_players_vehicules_with_default_option()
     {
         //Init Wargaming.net api key and region
-        $wot = new WorgamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+        $wot = new WargamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
 
         $players = $wot->playersTank(["500450795", "503197062", "500435236"]);
 
@@ -81,7 +81,7 @@ class testWargamingWotApi extends TestCase{
     public function check_players_vehicules_with_custom_option()
     {
         //Init Wargaming.net api key and region
-        $wot = new WorgamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+        $wot = new WargamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
 
         $players = $wot->playersTank(["500450795", "503197062", "500435236"], [
             "tanks" => ["2849", "10785"]
@@ -96,7 +96,7 @@ class testWargamingWotApi extends TestCase{
      */
     public function check_achivement_player_work_with_default_options()
     {
-        $wot = new WorgamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+        $wot = new WargamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
 
         $players = $wot->playerAchievement(["500080014", "514444123"]);
 
