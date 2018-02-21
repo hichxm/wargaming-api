@@ -58,7 +58,6 @@ class testWargamingWotApi extends TestCase{
         $players = $wot->infoPlayersById(["500080014", "514444123"]);
 
         $this->assertEquals("volca780", $players['players']["514444123"]['nickname']);
-
     }
 
     /**
@@ -89,6 +88,19 @@ class testWargamingWotApi extends TestCase{
         ]);
 
         $this->assertEquals(3, $players['count']);
+    }
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function check_achivement_player_work_with_default_options()
+    {
+        $wot = new WorgamingWotApi("e9807cace93606169c54fb8e9ec763b2", "eu");
+
+        $players = $wot->playerAchievement(["500080014", "514444123"]);
+
+        $this->assertEquals(2, $players['count']);
     }
 
 }

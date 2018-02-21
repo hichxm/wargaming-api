@@ -14,7 +14,8 @@ class WorgamingWotApi
     private $links = [
         "accountSearch" => "api.worldoftanks.{region}/wot/account/list/?application_id={key}&search={search}&limit={limit}&type={method}",
         "accountId" => "api.worldoftanks.{region}/wot/account/info/?application_id={key}&account_id={accounts}",
-        "accountTank" => "api.worldoftanks.{region}/wot/account/tanks/?application_id={key}&account_id={accounts}&tank_id={tanks}"
+        "accountTank" => "api.worldoftanks.{region}/wot/account/tanks/?application_id={key}&account_id={accounts}&tank_id={tanks}",
+        "accountAchivement" => "api.worldoftanks.{region}/wot/account/achievements/?application_id={key}&account_id={accounts}"
     ];
 
     /**
@@ -122,6 +123,30 @@ class WorgamingWotApi
     }
 
     /**
+     * @param array $accounts_id
+     * @return array
+     * @throws Exception
+     */
+    public function playerAchievement($accounts_id)
+    {
+        $accounts = null;
+        foreach ($accounts_id as $account_id) {
+            $accounts .= $account_id . ",";
+        }
+
+        $returned = $this->request("accountAchivement", [
+            "accounts" => $accounts,
+            "region" => !empty($options['region']) ? $options['region'] : $this->region
+        ]);
+
+        return [
+            "count" => $returned['meta']['count'],
+            "players" => $returned['data']
+        ];
+
+    }
+
+    /**
      * @param string $ref
      * @param array $options
      * @return mixed
@@ -153,6 +178,13 @@ class WorgamingWotApi
                 //Replace data of the link
                 $link = str_replace("{accounts}", $options['accounts'], $link);
                 $link = str_replace("{tanks}", $options['tanks'], $link);
+                $link = str_replace("{region}", $options['region'], $link);
+                break;
+
+            case "accountAchivement":
+
+                //Replace data of the link
+                $link = str_replace("{accounts}", $options['accounts'], $link);
                 $link = str_replace("{region}", $options['region'], $link);
                 break;
         }
