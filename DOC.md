@@ -1,6 +1,19 @@
 ## Table of contents
 
+- [\Hichxm\WarGaming\WorgamingWotApi](#class-hichxmwargamingworgamingwotapi)
 - [\Hichxm\WarGaming\WargamingApi](#class-hichxmwargamingwargamingapi)
+
+<hr />
+
+### Class: \Hichxm\WarGaming\WorgamingWotApi
+
+| Visibility | Function |
+|:-----------|:---------|
+| public | <strong>__construct(</strong><em>\string</em> <strong>$key</strong>, <em>\string</em> <strong>$region</strong>)</strong> : <em>void</em><br /><em>WargamingWotApi constructor.</em> |
+| public | <strong>infoPlayersById(</strong><em>array</em> <strong>$accounts_id</strong>)</strong> : <em>array</em> |
+| public | <strong>playerAchievement(</strong><em>array</em> <strong>$accounts_id</strong>)</strong> : <em>array</em> |
+| public | <strong>playersTank(</strong><em>array</em> <strong>$accounts_id</strong>, <em>array/null</em> <strong>$options=null</strong>)</strong> : <em>array</em> |
+| public | <strong>searchPlayers(</strong><em>string</em> <strong>$search</strong>, <em>array/null</em> <strong>$options=null</strong>)</strong> : <em>array</em> |
 
 <hr />
 
