@@ -1,6 +1,10 @@
 
 
-# Wargaming Api
+# Wargaming Api 
+[![GitHub tag](https://img.shields.io/github/tag/hichxm/wargaming-api.svg)]()
+[![GitHub license](https://img.shields.io/github/license/hichxm/wargaming-api.svg)](https://github.com/hichxm/wargaming-api/blob/master/LICENSE.md)
+[![PHP from Packagist](https://img.shields.io/packagist/php-v/hichxm/wargaming-api.svg)]()
+[![GitHub issues](https://img.shields.io/github/issues/hichxm/wargaming-api.svg)](https://github.com/hichxm/wargaming-api/issues)
 
 This package composer, allows to use more simply the 
 **wargaming API** with a very simple and well documented 
